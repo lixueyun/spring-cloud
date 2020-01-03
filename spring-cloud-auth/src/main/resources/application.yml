@@ -1,0 +1,22 @@
+server:
+  port: 9082
+
+spring:
+  application:
+    name: spring-cloud-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.16.34.168:8848
+        namespace: 59e45e6f-1030-4c7a-b2db-9ce1eec02630
+
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

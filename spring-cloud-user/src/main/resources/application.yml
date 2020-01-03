@@ -1,0 +1,64 @@
+server:
+  port: 9081
+
+spring:
+  application:
+    name: spring-cloud-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.16.34.168:8848
+        namespace: 59e45e6f-1030-4c7a-b2db-9ce1eec02630
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8082
+      datasource:
+        #流量控制规则 (FlowRule)
+        flow:
+          zk:
+            serverAddr: 192.168.174.128:2181,192.168.174.129:2181,192.168.174.130:2181
+            groupId: sentinel_rule_config/${spring.application.name}
+            dataId: FLOW-RULE
+            ruleType: FLOW
+        #熔断降级规则 (DegradeRule)
+        degrade:
+          zk:
+            serverAddr: 192.168.174.128:2181,192.168.174.129:2181,192.168.174.130:2181
+            groupId: sentinel_rule_config/${spring.application.name}
+            dataId: DEGRADE-RULE
+            ruleType: DEGRADE
+        #系统保护规则 (SystemRule)
+        system:
+          zk:
+            serverAddr: 192.168.174.128:2181,192.168.174.129:2181,192.168.174.130:2181
+            groupId: sentinel_rule_config/${spring.application.name}
+            dataId: SYSTEM-RULE
+            ruleType: SYSTEM
+        #热点规则 (ParamFlowRule)
+        param_flow:
+          zk:
+            serverAddr: 192.168.174.128:2181,192.168.174.129:2181,192.168.174.130:2181
+            groupId: sentinel_rule_config/${spring.application.name}
+            dataId: PARAM-FLOW-RULE
+            ruleType: PARAM_FLOW
+        #访问控制规则 (AuthorityRule)
+        authority:
+          zk:
+            serverAddr: 192.168.174.128:2181,192.168.174.129:2181,192.168.174.130:2181
+            groupId: sentinel_rule_config/${spring.application.name}
+            dataId: AUTHORITY-RULE
+            ruleType: AUTHORITY
+        #GW_FLOW (GW_FLOW) 待补
+        #GW_API_GROUP (GW_API_GROUP) 待补
+
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
