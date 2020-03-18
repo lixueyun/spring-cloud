@@ -51,6 +51,8 @@ spring:
             ruleType: AUTHORITY
         #GW_FLOW (GW_FLOW) 待补
         #GW_API_GROUP (GW_API_GROUP) 待补
+      log:
+        dir: /app/logs/sentinel/
 
 
 management:
